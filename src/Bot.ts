@@ -169,7 +169,7 @@ export default class Bot {
   }
 
   async tweetFinishedGames () {
-    console.log('\nLooking for recently finished games')
+    console.log('\Procurando por partidas finalizados recentemente')
 
     const unfinished = await this.database.getUnfinishedGames()
 
@@ -202,7 +202,7 @@ export default class Bot {
           return `${player!.name} (${player!.summonerName}) - ${kills}/${deaths}/${assists}`
         }),
         '',
-        `Análise da partida: https://www.leagueofgraphs.com/pt/match/euw/${game.id}`
+        `Análise da partida em: https://www.leagueofgraphs.com/pt/match/euw/${game.id}`
       ].join('\n')
 
       await this.database.setGameFinished(game.id)
@@ -220,7 +220,7 @@ export default class Bot {
     const lastTokenHash = await this.database.getSetting('riot_api_token_hash')
 
     if (lastTokenHash != currentTokenHash) {
-      console.log('Riot API token has changed. Deleting all summoner IDs')
+      console.log('Token da API da Riot foi alterado. Deletando todos os summoner IDs')
       await this.database.playerModel.update({
         summonerId: null
       }, {
